@@ -159,23 +159,23 @@
 
   function seedTasks() {
     return [
-      { id: 't1', title: '실행 범위', owner: 'bui', status: '의논중',
+      { id: 't1', kind: 'agenda', title: '실행 범위', owner: 'bui', status: '의논중',
         desc: '웹 조회·예약·구매·전화 대행 등 실제 손발이 되어 처리할 수 있는 작업 범위' },
-      { id: 't2', title: '서비스 연동', owner: 'karmi', status: '진행중',
+      { id: 't2', kind: 'agenda', title: '서비스 연동', owner: 'karmi', status: '진행중',
         desc: '캘린더·노션·깃허브·메일 등 외부 계정 연결 및 활용 수준' },
-      { id: 't3', title: '기억과 맞춤화', owner: 'bui', status: '의논중',
+      { id: 't3', kind: 'agenda', title: '기억과 맞춤화', owner: 'bui', status: '의논중',
         desc: '이전 대화·선호·말투·출력 규칙을 얼마나 일관되게 유지하는지' },
-      { id: 't4', title: '속도·안정성', owner: 'karmi', status: '진행중',
+      { id: 't4', kind: 'agenda', title: '속도·안정성', owner: 'karmi', status: '진행중',
         desc: '복잡한 요청이나 사이트 인증이 걸렸을 때 끝까지 마무리하는 비율' },
-      { id: 't5', title: '비용·사용량', owner: 'bui', status: '의논중',
+      { id: 't5', kind: 'agenda', title: '비용·사용량', owner: 'bui', status: '의논중',
         desc: '무료·유료 구간 기준과 크레딧 소모 효율' },
-      { id: 't6', title: '보안·개인정보', owner: 'karmi', status: '완료',
+      { id: 't6', kind: 'agenda', title: '보안·개인정보', owner: 'karmi', status: '완료',
         desc: '비밀번호·결제 정보 입력 방식과 민감정보 비노출 원칙' },
-      { id: 't7', title: '결정 · 실무 실행', owner: 'karmi', status: '완료',
+      { id: 't7', kind: 'decision', title: '결정 · 실무 실행', owner: 'karmi', status: '완료',
         desc: '실무 실행·일정 관리·데이터 정리 및 최종 결정안 도출 담당' },
-      { id: 't8', title: '결정 · 의견 취합', owner: 'bui', status: '완료',
+      { id: 't8', kind: 'decision', title: '결정 · 의견 취합', owner: 'bui', status: '완료',
         desc: '다양한 아이디어·보조 시각·추가 대안 의견 취합 담당' },
-      { id: 't9', title: '비서실 페이지 배포', owner: 'karmi', status: '진행중',
+      { id: 't9', kind: 'build', title: '비서실 페이지 배포', owner: 'karmi', status: '진행중',
         desc: '까미·부이 합동 비서실 웹페이지 제작과 GitHub Pages 공개' },
     ];
   }
@@ -241,8 +241,8 @@
   }
 
   function renderMeta() {
-    const decisions = state.tasks.filter(t => t.title.startsWith('결정')).length;
-    const agenda = state.tasks.length - decisions;
+    const decisions = state.tasks.filter(t => t.kind === 'decision').length;
+    const agenda = state.tasks.filter(t => t.kind === 'agenda').length;
     el.navMeta.textContent = `안건 ${agenda} · 결정 ${decisions}`;
   }
 
@@ -328,8 +328,9 @@
     $$('.room-chips .chip').forEach(c => c.classList.toggle('is-active', c.dataset.room === active));
     el.roomSelect.value = active;
 
-    const working = Object.values(state.chars).filter(r => r !== 'lounge').length;
-    el.mapSub.textContent = `지금 ${working}명 근무 중`;
+    const lounge = Object.values(state.chars).filter(r => r === 'lounge').length;
+    const working = Object.keys(PEOPLE).length - lounge;
+    el.mapSub.textContent = lounge ? `지금 ${working}명 근무 · ${lounge}명 라운지` : `지금 ${working}명 근무 중`;
 
     layoutChars();
   }

@@ -208,13 +208,13 @@
       <form class="composer" id="composer" autocomplete="off">
         <div class="composer-top">
           <div class="author-picker" id="authorPicker" role="group" aria-label="발신자 선택">
-            <button class="author-chip is-active" data-author="minu" type="button">
+            <button class="author-chip is-active" data-author="minu" type="button" aria-label="민우 님으로 발신">
               <span class="mini"><svg viewBox="0 0 100 104"><use href="#art-minu" /></svg></span>민우 님
             </button>
-            <button class="author-chip" data-author="karmi" type="button">
+            <button class="author-chip" data-author="karmi" type="button" aria-label="까미(피클)로 발신">
               <span class="mini"><svg viewBox="0 0 100 104"><use href="#art-karmi" /></svg></span>까미(피클)
             </button>
-            <button class="author-chip" data-author="bui" type="button">
+            <button class="author-chip" data-author="bui" type="button" aria-label="부이로 발신">
               <span class="mini"><svg viewBox="0 0 100 104"><use href="#art-bui" /></svg></span>부이
             </button>
           </div>
@@ -257,7 +257,7 @@
 
 <!-- ── Firebase 연결 모달 ─────────────────────────────── -->
 <dialog class="modal" id="dbModal" aria-labelledby="dbModalTitle">
-  <form method="dialog" class="modal-card" id="dbForm">
+  <form method="dialog" class="modal-card" id="dbForm" novalidate>
     <div class="modal-head">
       <h2 id="dbModalTitle">⚡ 실시간 DB 연결</h2>
       <button class="modal-x" value="close" aria-label="닫기" type="submit">✕</button>
