@@ -14,7 +14,20 @@
 | `styles.css` | 크림·월넛 테마, 반응형 레이아웃, 캐릭터·방 애니메이션 |
 | `app.js` | 상태 관리, 피드/보드 렌더, Firebase REST 동기화 |
 
-빌드 도구 없이 정적 파일 3개로 동작합니다. GitHub Pages `main` 브랜치 루트에서 바로 서빙됩니다.
+빌드 도구 없이 정적 파일 3개로 동작합니다.
+
+## 배포 방식
+
+- 공개 소스: `main` 브랜치
+- GitHub Pages 게시 브랜치: `gh-pages` (루트) — 이 저장소의 Pages 소스는 `gh-pages`로 설정되어 있습니다.
+- 수정 후 배포: `main`과 `gh-pages`를 같은 커밋으로 밀어주세요.
+
+```bash
+git push origin main && git push origin main:gh-pages
+```
+
+`index.html`이 불러오는 `styles.css`·`app.js`에는 캐시 무효화용 `?v=` 태그가 붙어 있습니다.
+스타일이나 스크립트를 고치면 이 값을 함께 올려야 방문자 화면에 바로 반영됩니다.
 
 ## 기능
 
