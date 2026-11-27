@@ -858,8 +858,8 @@ a { color: var(--walnut); }
   .brand-text h1 { font-size: 16px; }
   .brand-text p { font-size: 11px; }
   .topbar-actions { width: 100%; gap: 6px; justify-content: space-between; }
-  .topbar-actions .btn { flex: 0 0 auto; justify-content: center; padding: 9px 11px; font-size: 12px; }
-  .sync-badge { flex: 0 0 auto; font-size: 11px; padding: 6px 9px; }
+  .topbar-actions .btn { flex: 0 0 auto; justify-content: center; padding: 8px 10px; font-size: 11.5px; }
+  .sync-badge { flex: 0 0 auto; font-size: 10.5px; padding: 5px 8px; gap: 5px; }
 
   .section-nav { margin: 10px 0; padding: 5px; border-radius: 14px; }
   .nav-btn { padding: 8px 12px; font-size: 12.5px; }
