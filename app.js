@@ -29,10 +29,10 @@
   const ST_CLASS = { '의논중': 's-talk', '진행중': 's-doing', '완료': 's-done' };
 
   const K_FB = 'yeonOffice.fbUrl';
-  const K_MSG = 'yeonOffice.messages';
-  const K_TASK = 'yeonOffice.tasks';
-  const K_CHAR = 'yeonOffice.chars';
-  const K_UI = 'yeonOffice.ui';
+  const K_MSG = 'yeonOffice.v2.messages';
+  const K_TASK = 'yeonOffice.v2.tasks';
+  const K_CHAR = 'yeonOffice.v2.chars';
+  const K_UI = 'yeonOffice.v2.ui';
   const POLL_MS = 3000;
 
   /* ── 상태 ───────────────────────────────────────────── */
@@ -201,6 +201,14 @@
       if (PEOPLE[ui.author]) state.author = ui.author;
       if (ROOM_LABEL[ui.room]) state.room = ui.room;
     }
+
+    // 이전 버전 저장분에 kind 가 없으면 제목으로 보정
+    state.tasks.forEach((t) => {
+      if (!t.kind) {
+        t.kind = t.title && t.title.startsWith('결정') ? 'decision'
+          : t.title && t.title.includes('배포') ? 'build' : 'agenda';
+      }
+    });
 
     state.messages.sort((a, b) => a.ts - b.ts);
     save(K_MSG, state.messages);
